@@ -1,4 +1,6 @@
-﻿namespace Project_ImageSoftwareTest
+﻿using System;
+
+namespace Project_ImageSoftwareTest
 {
     partial class MainForm
     {
@@ -58,6 +60,7 @@
             this.loadImageBtn.TabIndex = 1;
             this.loadImageBtn.Text = "Load Image";
             this.loadImageBtn.UseVisualStyleBackColor = false;
+            this.loadImageBtn.Click += new System.EventHandler(this.loadImageBtn_Click);
             // 
             // filterLabel
             // 
@@ -71,12 +74,21 @@
             // 
             // filterCombobox
             // 
+            this.filterCombobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.filterCombobox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.filterCombobox.FormattingEnabled = true;
+            this.filterCombobox.Items.AddRange(new object[]
+            {
+                "None",
+                "Black and White",
+                "Night Filter"
+            });
             this.filterCombobox.Location = new System.Drawing.Point(314, 894);
             this.filterCombobox.Name = "filterCombobox";
             this.filterCombobox.Size = new System.Drawing.Size(276, 34);
             this.filterCombobox.TabIndex = 3;
+            this.filterCombobox.SelectedIndex = 0;
+            this.filterCombobox.SelectedIndexChanged += new System.EventHandler(this.FilterSelectedEventHandler);
             // 
             // edgeLabel
             // 
@@ -108,6 +120,7 @@
             this.saveImageBtn.TabIndex = 6;
             this.saveImageBtn.Text = "Save Image";
             this.saveImageBtn.UseVisualStyleBackColor = false;
+            this.saveImageBtn.Click += new System.EventHandler(this.saveImageBtn_Click);
             // 
             // MainForm
             // 
