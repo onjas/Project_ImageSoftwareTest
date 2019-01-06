@@ -89,6 +89,7 @@ namespace Project_ImageSoftwareTest
             this.filterCombobox.TabIndex = 3;
             this.filterCombobox.SelectedIndex = 0;
             this.filterCombobox.SelectedIndexChanged += new System.EventHandler(this.FilterSelectedEventHandler);
+            this.filterCombobox.Enabled = false;
             // 
             // edgeLabel
             // 
@@ -102,12 +103,22 @@ namespace Project_ImageSoftwareTest
             // 
             // edgeCombobox
             // 
+            this.edgeCombobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.edgeCombobox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.edgeCombobox.FormattingEnabled = true;
+            this.edgeCombobox.Items.AddRange(new object[]
+            {
+                "None",
+                "Kirsch",
+                "Prewitt"
+            });
             this.edgeCombobox.Location = new System.Drawing.Point(817, 894);
             this.edgeCombobox.Name = "edgeCombobox";
             this.edgeCombobox.Size = new System.Drawing.Size(320, 34);
             this.edgeCombobox.TabIndex = 5;
+            this.edgeCombobox.SelectedIndex = 0;
+            this.edgeCombobox.SelectedIndexChanged += new System.EventHandler(this.EdgeDetectionSelectedEventHandler);
+            this.edgeCombobox.Enabled = false;
             // 
             // saveImageBtn
             // 

@@ -19,9 +19,10 @@ namespace Project_ImageSoftwareTest
             //Create the interfaces with the corresponding classes
             Interface_Image imageInterface = new Image();
             Interface_Filters filtersInterface = new Filters();
+            Interface_EdgeDetections edgeDetectionsInterface = new EdgeDetections();
 
             //Create the Business Layer with the imageInterface
-            BusinessLayer business = new BusinessLayer(imageInterface, filtersInterface);
+            BusinessLayer business = new BusinessLayer(imageInterface, filtersInterface,edgeDetectionsInterface);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

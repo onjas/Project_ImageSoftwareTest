@@ -57,8 +57,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLayer.cs" />
+    <Compile Include="CLASS + INTERFACES\EdgeDetections.cs" />
     <Compile Include="CLASS + INTERFACES\Filters.cs" />
     <Compile Include="CLASS + INTERFACES\Image.cs" />
+    <Compile Include="CLASS + INTERFACES\Interface_EdgeDetections.cs" />
     <Compile Include="CLASS + INTERFACES\Interface_Filters.cs" />
     <Compile Include="CLASS + INTERFACES\Interface_Image.cs" />
     <Compile Include="MainForm.cs">
