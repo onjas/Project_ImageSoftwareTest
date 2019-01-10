@@ -10,16 +10,15 @@ namespace Image_TestDoubles
     [TestClass]
     public class Image_UnitTests
     {
+        //Create interfaces used in Business layer
+        Interface_Image imageInterface = Substitute.For<Interface_Image>();
+        Interface_Filters filterInterface = Substitute.For<Interface_Filters>();
+        Interface_EdgeDetections edgeDetectionInterface = Substitute.For<Interface_EdgeDetections>();
 
         //Standard test of the input method file (image) with a new empty bitmap
         [TestMethod]
         public void InputFileStandard()
         {
-            //Create interfaces used in Business layer
-            var imageInterface = Substitute.For<Interface_Image>();
-            var filterInterface = Substitute.For<Interface_Filters>();
-            var edgeDetectionInterface = Substitute.For<Interface_EdgeDetections>();
-
             BusinessLayer business = new BusinessLayer(imageInterface,filterInterface,edgeDetectionInterface);
             imageInterface.getImage("nameOfFile").Returns<Bitmap>(new Bitmap(500, 500));
             business.setOriginalBitmap("nameOfFile");
@@ -31,12 +30,6 @@ namespace Image_TestDoubles
         [TestMethod]
         public void InputFile_ExceptionThrown()
         {
-            //Create interfaces used in Business layer
-            var imageInterface = Substitute.For<Interface_Image>();
-            var filterInterface = Substitute.For<Interface_Filters>();
-            var edgeDetectionInterface = Substitute.For<Interface_EdgeDetections>();
-
-
             imageInterface
                 .When(x => x.getImage(Arg.Any<string>()))
                 .Do(x => { throw new System.Exception(); });
@@ -52,11 +45,6 @@ namespace Image_TestDoubles
         [TestMethod]
         public void BlackWhiteFilter()
         {
-            //Create interfaces used in Business layer
-            var imageInterface = Substitute.For<Interface_Image>();
-            var filterInterface = Substitute.For<Interface_Filters>();
-            var edgeDetectionInterface = Substitute.For<Interface_EdgeDetections>();
-
             //Get a real image to test the method instead of using a new empty bitmap !
             Bitmap bitmap = Resources.No_filter;
             Bitmap resultInterf = null;
@@ -73,11 +61,6 @@ namespace Image_TestDoubles
         [TestMethod]
         public void NightFilter()
         {
-            //Create interfaces used in Business layer
-            var imageInterface = Substitute.For<Interface_Image>();
-            var filterInterface = Substitute.For<Interface_Filters>();
-            var edgeDetectionInterface = Substitute.For<Interface_EdgeDetections>();
-
             //Get a real image to test the method instead of using a new empty bitmap !
             Bitmap bitmap = Resources.No_filter;
             Bitmap resultInterf = null;
@@ -94,11 +77,6 @@ namespace Image_TestDoubles
         [TestMethod]
         public void KirschFilter()
         {
-            //Create interfaces used in Business layer
-            var imageInterface = Substitute.For<Interface_Image>();
-            var filterInterface = Substitute.For<Interface_Filters>();
-            var edgeDetectionInterface = Substitute.For<Interface_EdgeDetections>();
-
             //Get a real image to test the method instead of using a new empty bitmap !
             Bitmap bitmap = Resources.No_filter;
             Bitmap resultInterf = null;
@@ -115,11 +93,6 @@ namespace Image_TestDoubles
         [TestMethod]
         public void PrewittFilter()
         {
-            //Create interfaces used in Business layer
-            var imageInterface = Substitute.For<Interface_Image>();
-            var filterInterface = Substitute.For<Interface_Filters>();
-            var edgeDetectionInterface = Substitute.For<Interface_EdgeDetections>();
-
             //Get a real image to test the method instead of using a new empty bitmap !
             Bitmap bitmap = Resources.No_filter;
             Bitmap resultInterf = null;
@@ -138,11 +111,6 @@ namespace Image_TestDoubles
         [TestMethod]
         public void OutputFileMethod()
         {
-            //Create interfaces used in Business layer
-            var imageInterface = Substitute.For<Interface_Image>();
-            var filterInterface = Substitute.For<Interface_Filters>();
-            var edgeDetectionInterface = Substitute.For<Interface_EdgeDetections>();
-
             Bitmap bitmap = new Bitmap(300, 300);
             BusinessLayer business = new BusinessLayer(imageInterface, filterInterface, edgeDetectionInterface);
             imageInterface.saveImage("TestMethod_UnitTest", bitmap).Returns<Bitmap>(bitmap);
@@ -155,11 +123,6 @@ namespace Image_TestDoubles
         [TestMethod]
         public void OutputFileMethod_ExceptionThrown()
         {
-            //Create interfaces used in Business layer
-            var imageInterface = Substitute.For<Interface_Image>();
-            var filterInterface = Substitute.For<Interface_Filters>();
-            var edgeDetectionInterface = Substitute.For<Interface_EdgeDetections>();
-
             imageInterface
                 .When(x => x.saveImage(Arg.Any<string>(),Arg.Any<Bitmap>()))
                 .Do(x => { throw new System.Exception(); });
