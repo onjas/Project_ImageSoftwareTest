@@ -22,8 +22,11 @@ namespace Image_TestDoubles
             BusinessLayer business = new BusinessLayer(imageInterface,filterInterface,edgeDetectionInterface);
             imageInterface.getImage("nameOfFile").Returns<Bitmap>(new Bitmap(500, 500));
             business.setOriginalBitmap("nameOfFile");
-            
-            Assert.IsNotNull(business.getOriginalBitmap());
+
+            Size bitmapSize = business.getOriginalBitmap().Size;
+            Size expectedSize = new Size(500, 500);
+
+            Assert.AreEqual(expectedSize, bitmapSize);
         }
 
         //Exception test of the input method file (image), throws an exception and check with Assert using a boolean variable
