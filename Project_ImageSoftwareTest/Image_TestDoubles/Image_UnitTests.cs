@@ -16,6 +16,7 @@ namespace Image_TestDoubles
         Interface_EdgeDetections edgeDetectionInterface = Substitute.For<Interface_EdgeDetections>();
 
         //Standard test of the input method file (image) with a new empty bitmap
+        //Uses the "setOriginalBitmap" method in Business Layer -> when the user choses an image in the GUI
         [TestMethod]
         public void InputFileStandard()
         {
@@ -53,7 +54,7 @@ namespace Image_TestDoubles
             Bitmap resultInterf = null;
 
             BusinessLayer business = new BusinessLayer(imageInterface, filterInterface, edgeDetectionInterface);
-            resultInterf = filterInterface.blackWhiteFilter(bitmap);
+            filterInterface.blackWhiteFilter(bitmap).Returns<Bitmap>(resultInterf);
             business.applyBlackWhiteFilter(bitmap);
 
             Assert.AreEqual(business.getFilteredBitmap(), resultInterf);
@@ -69,7 +70,7 @@ namespace Image_TestDoubles
             Bitmap resultInterf = null;
 
             BusinessLayer business = new BusinessLayer(imageInterface, filterInterface, edgeDetectionInterface);
-            resultInterf = filterInterface.nightFilter(bitmap);
+            filterInterface.nightFilter(bitmap).Returns<Bitmap>(resultInterf);
             business.applyNightFilter(bitmap);
 
             Assert.AreEqual(business.getFilteredBitmap(),resultInterf);
@@ -85,7 +86,7 @@ namespace Image_TestDoubles
             Bitmap resultInterf = null;
 
             BusinessLayer business = new BusinessLayer(imageInterface, filterInterface, edgeDetectionInterface);
-            resultInterf = edgeDetectionInterface.kirschFilter(bitmap);
+            edgeDetectionInterface.kirschFilter(bitmap).Returns<Bitmap>(resultInterf); ;
             business.applyKirschEdgeDetection(bitmap);
 
             Assert.AreEqual(business.getEdgeDetectedBitmap(), resultInterf);
@@ -101,7 +102,7 @@ namespace Image_TestDoubles
             Bitmap resultInterf = null;
 
             BusinessLayer business = new BusinessLayer(imageInterface, filterInterface, edgeDetectionInterface);
-            resultInterf = edgeDetectionInterface.prewittFilter(bitmap);
+            edgeDetectionInterface.prewittFilter(bitmap).Returns<Bitmap>(resultInterf); ;
             business.applyPrewittEdgeDetection(bitmap);
 
             Assert.AreEqual(business.getEdgeDetectedBitmap(), resultInterf);
@@ -119,7 +120,10 @@ namespace Image_TestDoubles
             imageInterface.saveImage("TestMethod_UnitTest", bitmap).Returns<Bitmap>(bitmap);
             business.saveImageInDirectory("TestMethod_UnitTest", bitmap);
 
-            Assert.IsNotNull(business.getSavedImage());
+            Size bitmapSize = business.getSavedImage().Size;
+            Size expectedSize = new Size(300, 300);
+
+            Assert.AreEqual(expectedSize, bitmapSize);
         }
 
         //Raise an exception in the Output file method (saving)
